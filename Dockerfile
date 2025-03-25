@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --chown=node:node . .
 
 # Install dependencies (without dev dependencies)
-RUN npm install --omit=dev
+RUN npm install
 
 # Expose n8n's default port
 EXPOSE 5678
