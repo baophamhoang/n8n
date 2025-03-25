@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --chown=node:node . .
 
 # Install dependencies using pnpm
-RUN pnpm install --recursive
+RUN pnpm install --recursive --ignore-scripts
 
 # Expose n8n's default port
 EXPOSE 5678
