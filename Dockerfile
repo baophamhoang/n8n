@@ -25,8 +25,8 @@ WORKDIR /app
 # Copy project files
 COPY --chown=node:node . .
 
-# Install dependencies (without dev dependencies)
-RUN npm install
+# Install dependencies using pnpm
+RUN pnpm install --recursive
 
 # Expose n8n's default port
 EXPOSE 5678
