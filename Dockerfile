@@ -14,6 +14,9 @@ RUN mkdir /workspaces && chown node:node /workspaces
 USER node
 
 # Ensure pnpm is installed
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Configure pnpm store
 RUN mkdir -p ~/.pnpm-store && pnpm config set store-dir ~/.pnpm-store --global
 
 # Set working directory
@@ -22,11 +25,11 @@ WORKDIR /app
 # Copy project files
 COPY --chown=node:node . .
 
-# Install dependencies
-RUN npm ci
+# Install dependencies (without dev dependencies)
+RUN npm install --omit=dev
 
 # Expose n8n's default port
 EXPOSE 5678
 
 # Start n8n
-CMD ["node", "packages/cli/bin/n8n"]
+CMD ["n8n"]
